@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "423663442788",
+    "project_id": "flutter-firebase-login-louis",
+    "storage_bucket": "flutter-firebase-login-louis.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:423663442788:android:620fff25536abb9dc97871",
+        "android_client_info": {
+          "package_name": "com.example.flutter_firebase_login"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "423663442788-5j86r68lv3tmat4p3nb3j49nnmvd74j7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqMyessO0ph7Sj-hxOMxKcAr4RRBJW580"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "423663442788-5j86r68lv3tmat4p3nb3j49nnmvd74j7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
