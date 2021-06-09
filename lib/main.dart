@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'decision_tree.dart';
-
 import 'package:firebase_core/firebase_core.dart';
+
+import 'screens/decision_tree.dart';
+import 'screens/home/item_description.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +20,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.lightGreen,
       ),
       home: SystemUI(),
+      routes: {
+        ItemDescription.routeName: (BuildContext context) => ItemDescription(),
+      },
     );
   }
 }

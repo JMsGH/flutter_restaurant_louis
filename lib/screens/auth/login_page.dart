@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../../settings/settings.dart';
 
 class LoginPage extends StatefulWidget {
   final Function(User?) onSignIn;
@@ -15,6 +16,7 @@ class _LoginPageState extends State<LoginPage> {
 
   String error = '';
   bool login = true;
+  bool hidePassword = true;
 
   Future<void> loginAno() async {
     UserCredential userCredential =
@@ -61,25 +63,54 @@ class _LoginPageState extends State<LoginPage> {
         title: Text('ログイン'),
       ),
       body: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(40.0),
+        physics: BouncingScrollPhysics(),
+        child: Padding(
+          padding: const EdgeInsets.only(
+            left: 20,
+            // bottom: 50,
+            top: 150,
+            right: 20,
+          ),
+          child: Center(
             child: Column(
               children: [
-                SizedBox(
-                  height: 30,
-                ),
+                // SizedBox(
+                //   height: 30,
+                // ),
                 TextFormField(
                   controller: _controllerEmail,
                   decoration: InputDecoration(
-                    labelText: 'メールアドレス',
+                    hintText: 'メールアドレス',
+                    fillColor: Colors.blueGrey.withOpacity(0.1),
+                    filled: true,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
                   ),
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                SizedBox(
+                  height: 10,
                 ),
                 TextFormField(
                   controller: _controllerPassword,
                   decoration: InputDecoration(
-                    labelText: 'パスワード',
+                    hintText: 'パスワード',
+                    fillColor: Colors.blueGrey.withOpacity(0.1),
+                    filled: true,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    suffixIcon: IconButton(
+                      icon: Icon(hidePassword ? Icons.lock : Icons.lock_open),
+                      onPressed: () {
+                        setState(() {
+                          hidePassword = !hidePassword;
+                        });
+                      },
+                    ),
                   ),
+                  obscureText: hidePassword,
                 ),
                 SizedBox(
                   height: 30,
@@ -88,17 +119,15 @@ class _LoginPageState extends State<LoginPage> {
                   error,
                   style: TextStyle(color: Colors.redAccent),
                 ),
-                ElevatedButton(
-                  onPressed: () {
+                CustomButton(
+                  function: () {
                     login ? signInUser() : createUser();
                   },
-                  child: Text(
-                    login ? 'ログイン' : '新規登録',
-                    style: TextStyle(fontSize: 20),
-                  ),
+                  text: login ? 'ログイン' : '新規登録',
+                  fontSize: 20,
                 ),
                 Container(
-                  height: 70,
+                  height: 40,
                   child: Center(
                       child: Text(
                     'または',
@@ -119,7 +148,7 @@ class _LoginPageState extends State<LoginPage> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(6)))),
                   child: Text(
-                    login ? '新規登録' : 'メールアドレスでログイン',
+                    login ? '新規登録する' : 'メールアドレスでログインする',
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.indigo[900],
@@ -128,7 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 Container(
-                  height: 70,
+                  height: 40,
                   child: Center(
                       child: Text(
                     'または',
@@ -137,17 +166,13 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   )),
                 ),
-                ElevatedButton(
-                  onPressed: () {
+                CustomButton(
+                  function: () {
                     loginAno();
                   },
-                  child: Text(
-                    '匿名でログイン',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.lightGreen[200],
-                  ),
+                  text: '匿名でログイン',
+                  fontSize: 16,
+                  color: Colors.lightGreen[200],
                 ),
               ],
             ),
